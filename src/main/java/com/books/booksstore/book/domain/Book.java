@@ -25,9 +25,9 @@ public class Book {
 
     private String isbn;
 
-//    private String title;
-//
-//    private String authorName;
-//
-//    private double price;
+    private String title;
+
+    private String authorName;
+
+    private double price;
 }

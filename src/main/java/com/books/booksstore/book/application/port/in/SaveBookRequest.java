@@ -17,12 +17,12 @@ public class SaveBookRequest {
     @NotBlank
     private String isbn;
 
-//    @NotBlank
-//    private String title;
-//
-//    @NotBlank
-//    private String authorName;
-//
-//    @Min(value = 0, message = "Book should cost more the 0")
-//    private double price;
+    @NotBlank
+    private String title;
+
+    @NotBlank
+    private String authorName;
+
+    @Min(value = 0, message = "Book should cost more the 0")
+    private double price;
 }

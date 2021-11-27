@@ -5,14 +5,15 @@ import com.books.booksstore.book.domain.Book;
 
 public final class BookMapper {
 
-    private BookMapper() {}
+    private BookMapper() {
+    }
 
     public static Book from(SaveBookRequest bookRequest) {
         return Book.builder()
             .isbn(bookRequest.getIsbn())
-//            .title(bookRequest.getTitle())
-//            .authorName(bookRequest.getAuthorName())
-//            .price(bookRequest.getPrice())
+            .title(bookRequest.getTitle())
+            .authorName(bookRequest.getAuthorName())
+            .price(bookRequest.getPrice())
             .build();
     }
 }
