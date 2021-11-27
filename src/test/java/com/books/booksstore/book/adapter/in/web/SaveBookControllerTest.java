@@ -1,9 +1,11 @@
 package com.books.booksstore.book.adapter.in.web;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -48,14 +50,16 @@ class SaveBookControllerTest {
 
     @Test
     @SneakyThrows
-    void should_return_BAD_REQUEST_when_given_invalid_request() {
+    void should_return_UNPROCESSABLE_ENTITY_when_given_invalid_request() {
         doNothing().when(saveBookUseCase).saveBook(any(SaveBookRequest.class));
 
         String requestJson = objectMapper.writeValueAsString(SaveBookRequest.builder()
-            .authorName("Some author").price(222.222).build());
+            .authorName("Some author").isbn("").price(222.222).build());
 
         mockMvc.perform(post("/api/books").contentType(APPLICATION_JSON).content(requestJson))
-            .andExpect(status().isBadRequest());
+            .andExpect(status().isUnprocessableEntity())
+            .andExpect(jsonPath("$.errors", hasItem("Violation for isbn: must not be blank")))
+            .andExpect(jsonPath("$.errors", hasItem("Violation for title: must not be blank")));
     }
 
 }
