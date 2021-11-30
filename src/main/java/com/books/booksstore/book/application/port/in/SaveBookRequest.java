@@ -1,13 +1,10 @@
 package com.books.booksstore.book.application.port.in;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -25,6 +22,6 @@ public class SaveBookRequest {
     @NotBlank
     private String authorName;
 
-    @Min(value = 0, message = "Book should cost more the 0")
+    @DecimalMin("1.0")
     private double price;
 }

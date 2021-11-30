@@ -1,1 +1,1 @@
-### Example and notes on clean architecture
+### Example and notes on clean architecture. One module project
