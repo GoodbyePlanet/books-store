@@ -1,6 +1,9 @@
 package com.books.booksstore.book.application.service;
 
 import static com.books.booksstore.book.domain.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
@@ -25,9 +28,7 @@ class SaveBookServiceTest {
 
     @Test
     void saveBook() {
-        SaveBookRequest saveBookRequest = SaveBookRequest.builder()
-            .isbn("12345").authorName("Author").title("Book title").price(123.123)
-            .build();
+        SaveBookRequest saveBookRequest = getSaveBookRequest();
         ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
 
         saveBookService.saveBook(saveBookRequest);
@@ -38,5 +39,22 @@ class SaveBookServiceTest {
 
         assertThat(book).hasIsbn(saveBookRequest.getIsbn()).hasAuthorName(saveBookRequest.getAuthorName())
             .hasTitle(saveBookRequest.getTitle()).hasPrice(saveBookRequest.getPrice());
+    }
+
+    @Test
+    void saveBook_BDD_example() {
+        SaveBookRequest saveBookRequest = getSaveBookRequest();
+
+        willDoNothing().given(saveBookPort).saveBook(any(Book.class));
+
+        saveBookService.saveBook(saveBookRequest);
+
+        then(saveBookPort).should().saveBook(any(Book.class));
+    }
+
+    private SaveBookRequest getSaveBookRequest() {
+        return SaveBookRequest.builder()
+            .isbn("12345").authorName("Author").title("Book title").price(123.123)
+            .build();
     }
 }
