@@ -1,14 +1,16 @@
-package com.books.booksstore.book.domain;
+package com.books.booksstore.category.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.books.booksstore.category.domain.Category;
+import com.books.booksstore.book.domain.Book;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,21 +24,14 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String isbn;
+    private String name;
 
-    private String title;
-
-    private String authorName;
-
-    private double price;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Book> books;
 }

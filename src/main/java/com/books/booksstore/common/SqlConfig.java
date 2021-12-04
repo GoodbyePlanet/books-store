@@ -1,4 +1,4 @@
-package com.books.booksstore.book.adapter.out.persistence;
+package com.books.booksstore.common;
 
 import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl;

@@ -1,6 +1,8 @@
 package com.books.booksstore.book.adapter.out.persistence;
 
 import com.books.booksstore.book.domain.Book;
+import com.books.booksstore.common.SqlConfig;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
